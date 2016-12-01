@@ -29,7 +29,7 @@ public class MainWindow extends JFrame{
 	class BoardPanel extends JPanel {
 		@Override
 		public void paint(Graphics g){
-			super.paint(g); //vykresli prazdny panel
+			super.paint(g); //vykresli prazdny panel asfgasgf
 			gameboard.draw(g); // vykresli herni plochu
 		}
 	}

@@ -31,7 +31,7 @@ public class Bird implements TickAware{
 		g.setColor(Color.green);
 		g.fillOval(viewportX-Tile.SIZE/2, (int)viewportY-Tile.SIZE/2, Tile.SIZE, Tile.SIZE);
 		
-		//poloha ptaka - pomocna debuggovaci informace
+		//poloha ptaka - pomocna debuggovaci informace fasfa
 		g.setColor(Color.BLACK);
 		g.drawString(viewportX+", "+viewportY, viewportX, (int)viewportY);
 	}

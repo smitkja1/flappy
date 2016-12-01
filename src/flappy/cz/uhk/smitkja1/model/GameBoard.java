@@ -28,7 +28,7 @@ public class GameBoard implements TickAware{
 		for (int i = 0; i < tiles.length; i++){
 			for (int j = minJ; j < maxJ; j++){
 				//datovy typ mohou pretekat dokola, chceme aby se svet opakoval
-				//j2 se pohybuje od nula do pocet sloupcu - 1
+				//j2 se pohybuje od nula do pocet sloupcu - 1 safasf
 				int j2 = j % tiles[0].length;
 				Tile t = tiles[i][j2];
 				if(t != null){				

@@ -7,7 +7,7 @@ import flappy.cz.uhk.smitkja1.model.GameBoard;
 
 public interface GameBoardLoader {
 	/*
-	 * nacte level (herni plochu)
+	 * nacte level (herni plochu) fsafas
 	 */
 	GameBoard loadLevel();
 

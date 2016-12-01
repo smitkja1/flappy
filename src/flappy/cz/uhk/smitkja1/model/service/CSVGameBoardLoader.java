@@ -22,7 +22,7 @@ public class CSVGameBoardLoader implements GameBoardLoader{
 			String[] line = br.readLine().split(";");
 			int typeFound = Integer.parseInt(line[0]);							
 			for (int i = 0; i < typeFound; i++){
-				br.readLine(); // posuneme se za data
+				br.readLine(); // posuneme se za data asfasf
 			}
 			line = br.readLine().split(";");
 			int rows = Integer.parseInt(line[0]);

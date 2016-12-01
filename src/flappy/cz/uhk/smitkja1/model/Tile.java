@@ -8,7 +8,7 @@ import java.awt.Graphics;
 
 public interface Tile {
 	
-	static final int SIZE = 20; //sirka a vyska dlazdice v pixelech
+	static final int SIZE = 20; //sirka a vyska dlazdice v pixelech fasfasfg
 	
 	
 	

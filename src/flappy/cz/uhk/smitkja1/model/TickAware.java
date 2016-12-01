@@ -7,7 +7,7 @@ package flappy.cz.uhk.smitkja1.model;
 public interface TickAware {
 	/*
 	 * zmeni stav herni entity s ohledem na zmenu herniho casu
-	 * ticksSinceStart - kolik ubehlo od zacatku hry 
+	 * ticksSinceStart - kolik ubehlo od zacatku hry  FASFZIAGIGI
 	 */
 	
 	public void tick(long ticksSinceStart);
