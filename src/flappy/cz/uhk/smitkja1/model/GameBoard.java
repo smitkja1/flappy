@@ -12,7 +12,7 @@ public class GameBoard implements TickAware{
 	
 	public GameBoard() {
 		tiles = new Tile[20][20];
-		tiles[2][1] = new WallTile();
+		//tiles[2][1] = new WallTile();
 		bird = new Bird(viewportWidth/2, tiles.length*Tile.SIZE/2);
 	}
 	
@@ -28,7 +28,7 @@ public class GameBoard implements TickAware{
 		for (int i = 0; i < tiles.length; i++){
 			for (int j = minJ; j < maxJ; j++){
 				//datovy typ mohou pretekat dokola, chceme aby se svet opakoval
-				//j2 se pohybuje od nula do pocet sloupcu - 1 safasf
+				//j2 se pohybuje od nula do pocet sloupcu - 1
 				int j2 = j % tiles[0].length;
 				Tile t = tiles[i][j2];
 				if(t != null){				
