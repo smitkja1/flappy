@@ -76,7 +76,7 @@ public class CSVGameBoardLoader implements GameBoardLoader{
 	}
 
 	private Tile createTile(String tileName, int xPos, int yPos, int xSize, int ySize, String url) throws IOException {
-				// nacist obrazek z URL
+			// nacist obrazek z URL
 			BufferedImage originalImage = ImageIO.read(new URL(url));
 			// vyriznout z obrazku sprite podle x,y, a sirka vyska
 			BufferedImage croppedImage = originalImage.getSubimage(xPos, yPos, xSize, ySize);

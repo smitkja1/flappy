@@ -9,6 +9,7 @@ public class GameBoard implements TickAware{
 	int shiftX = 30;
 	int viewportWidth = 200;
 	Bird bird;
+	boolean gameOver = false;
 	
 	public GameBoard() {
 		tiles = new Tile[20][20];
@@ -21,7 +22,8 @@ public class GameBoard implements TickAware{
 		bird = new Bird(viewportWidth/2, tiles.length*Tile.SIZE/2);
 	}
 	
-	public void draw(Graphics g){
+	public void drawAndTestCollisions(Graphics g){
+		//vykresli gameboard, ptaka a checkuje kolize
 		int minJ = shiftX/Tile.SIZE;
 		//2 pro zaokrouhleni nahoru po deleni
 		int maxJ = minJ + viewportWidth/Tile.SIZE + 2; 
@@ -35,9 +37,15 @@ public class GameBoard implements TickAware{
 					int screenX = j*Tile.SIZE - shiftX;
 					int screenY = i*Tile.SIZE;
 					t.draw(g, screenX, screenY);
-				}
-				
-				
+					//nakreslime dlazdici a otestujeme moznou kolizi s ptakem
+					if (t instanceof WallTile){
+						if(bird.collidesWithRectangle(screenX, screenY, Tile.SIZE, Tile.SIZE)){
+						System.out.println("kolize");
+						gameOver = true;
+						}
+					//TODO pridat bonusy - pres kolizi, jakmile ho ptak sezere tak zmizi	
+					}
+				}						
 			}
 		}
 		bird.draw(g);
@@ -46,13 +54,15 @@ public class GameBoard implements TickAware{
 
 	@Override
 	public void tick(long ticksSinceStart) {
+		if(!gameOver){
 		/*s kazdym tickem ve hre posuneme hru o jeden pixel
 		 * pocet vlastnich ticku a pixelu posunu se rovanji
 		 */
 		shiftX = (int)ticksSinceStart;
 		
 		//dame vedet ptakovi ze hodiny tickkli
-		bird.tick(ticksSinceStart);					
+		bird.tick(ticksSinceStart);
+		}
 	}
 	
 	public int getHeightFix(){

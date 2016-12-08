@@ -30,7 +30,7 @@ public class MainWindow extends JFrame{
 		@Override
 		public void paint(Graphics g){
 			super.paint(g); //vykresli prazdny panel asfgasgf
-			gameboard.draw(g); // vykresli herni plochu
+			gameboard.drawAndTestCollisions(g); // vykresli herni plochu
 		}
 	}
 	

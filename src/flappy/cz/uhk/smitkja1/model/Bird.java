@@ -2,6 +2,7 @@ package flappy.cz.uhk.smitkja1.model;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.geom.Ellipse2D;
 
 
 public class Bird implements TickAware{
@@ -36,6 +37,10 @@ public class Bird implements TickAware{
 		g.drawString(viewportX+", "+viewportY, viewportX, (int)viewportY);
 	}
 	
+	public boolean collidesWithRectangle(int x, int y, int w, int h) {
+		Ellipse2D.Float birdsFoundary = new Ellipse2D.Float(viewportX-Tile.SIZE/2, (int)viewportY-Tile.SIZE/2, Tile.SIZE, Tile.SIZE);
+		return birdsFoundary.intersects(x, y, w, h);	
+	}
 
 	@Override
 	public void tick(long ticksSinceStart) {
