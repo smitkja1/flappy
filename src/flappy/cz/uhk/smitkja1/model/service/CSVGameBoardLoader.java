@@ -1,12 +1,18 @@
 package flappy.cz.uhk.smitkja1.model.service;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
+
+import flappy.cz.uhk.smitkja1.model.tiles.EmptyTile;
 import flappy.cz.uhk.smitkja1.model.GameBoard;
 import flappy.cz.uhk.smitkja1.model.Tile;
 import flappy.cz.uhk.smitkja1.model.tiles.WallTile;
@@ -46,7 +52,6 @@ public class CSVGameBoardLoader implements GameBoardLoader{
 			Tile[][] tiles = new Tile[rows][columns];			
 			System.out.println(rows + "," + columns);
 			//prochazi pozici dalzdic
-			Tile tile = new WallTile();
 			for (int i = 0; i < rows; i++){
 				line = br.readLine().split(";");
 				for (int j = 0; j < columns; j++){
@@ -70,11 +75,28 @@ public class CSVGameBoardLoader implements GameBoardLoader{
 		}
 	}
 
-	private Tile createTile(String tileName, int xPos, int yPos, int xSize, int ySize, String url) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	private Tile createTile(String tileName, int xPos, int yPos, int xSize, int ySize, String url) throws IOException {
+				// nacist obrazek z URL
+			BufferedImage originalImage = ImageIO.read(new URL(url));
+			// vyriznout z obrazku sprite podle x,y, a sirka vyska
+			BufferedImage croppedImage = originalImage.getSubimage(xPos, yPos, xSize, ySize);
+			// zvetsime/zmensime sprite tak, aby pasoval do naseho rozmeru dlazdice
+			BufferedImage resizedImage = new BufferedImage(Tile.SIZE, Tile.SIZE, BufferedImage.TYPE_INT_ARGB);
+			// TODO nastavit parametry pro scaling
+			Graphics2D g = (Graphics2D)resizedImage.getGraphics();
+			g.drawImage(croppedImage, 0, 0, Tile.SIZE, Tile.SIZE, null);
+			// podle typu (clazz) vytvorime instanci patricne tridy
+			switch (tileName) {
+			case "Wall":
+				return new WallTile(resizedImage);
+			case "Bonus":
+				return new WallTile(resizedImage); // TODO dodelat dlazdici typu bonus
+			case "Empty":
+				return new EmptyTile(resizedImage);  
+			default:
+				throw new RuntimeException("Neznama trida dlazdice " + tileName);
+			}
+		}
 	
 	
 	

@@ -2,10 +2,11 @@ package flappy.cz.uhk.smitkja1.model.tiles;
 
 import java.awt.Image;
 
-public class WallTile extends AbstractWallTile {
+public class EmptyTile extends AbstractWallTile {
 
-	public WallTile(Image image) {
+	public EmptyTile(Image image) {
 		super(image);
 	}
 	
+
 }
