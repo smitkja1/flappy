@@ -34,8 +34,6 @@ public class Bird implements TickAware{
 	}
 	
 	public void draw(Graphics g) {
-		//g.setColor(Color.green);
-		//g.fillOval(viewportX-Tile.SIZE/2, (int)viewportY-Tile.SIZE/2, Tile.SIZE, Tile.SIZE);
 		g.drawImage(image, viewportX-Tile.SIZE/2, (int)viewportY-Tile.SIZE/2, null);
 		
 		//poloha ptaka - pomocna debuggovaci informace fasfa

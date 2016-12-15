@@ -7,7 +7,7 @@ import java.awt.Image;
 public class BonusTile extends AbstractWallTile {
 	
 	private boolean active;
-	
+	//bonusova dlazdice
 	public BonusTile(Image image) {
 		super(image);
 		active = true;

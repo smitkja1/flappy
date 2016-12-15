@@ -7,6 +7,6 @@ public class EmptyTile extends AbstractWallTile {
 	public EmptyTile(Image image) {
 		super(image);
 	}
-	
+	//prazdna dlazdice
 
 }

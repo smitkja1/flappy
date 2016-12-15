@@ -44,7 +44,7 @@ public class GameBoard implements TickAware{
 						System.out.println("bonus");
 						((BonusTile) t).setActive(false);											
 					}}
-					//TODO pridat bonusy - pres kolizi, jakmile ho ptak sezere tak zmizi	
+					
 					}						
 				}
 			}

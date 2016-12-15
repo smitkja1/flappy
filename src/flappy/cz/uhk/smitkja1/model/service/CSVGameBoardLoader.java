@@ -104,7 +104,7 @@ public class CSVGameBoardLoader implements GameBoardLoader{
 		BufferedImage croppedImage = originalImage.getSubimage(xPos, yPos, xSize, ySize);
 		// zvetsime/zmensime sprite tak, aby pasoval do naseho rozmeru dlazdice
 		BufferedImage resizedImage = new BufferedImage(Tile.SIZE, Tile.SIZE, BufferedImage.TYPE_INT_ARGB);
-		// TODO nastavit parametry pro scaling
+		
 		Graphics2D g = (Graphics2D)resizedImage.getGraphics();
 		g.drawImage(croppedImage, 0, 0, Tile.SIZE, Tile.SIZE, null);
 		return resizedImage;
