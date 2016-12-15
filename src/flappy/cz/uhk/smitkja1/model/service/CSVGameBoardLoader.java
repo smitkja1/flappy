@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,6 +35,7 @@ public class CSVGameBoardLoader implements GameBoardLoader{
 			int typeFound = Integer.parseInt(line[0]);	
 			//prochazi typy dlazdic
 			Map<String, Tile> tileTypes = new HashMap<>();
+			BufferedImage imageOfTheBird = null;
 			for (int i = 0; i < typeFound; i++){
 				line = br.readLine().split(";");
 				String tileType = line[0];
@@ -43,9 +45,12 @@ public class CSVGameBoardLoader implements GameBoardLoader{
 				int xSize = Integer.parseInt(line[4]);
 				int ySize = Integer.parseInt(line[5]);
 				String url = line[6];
-				Tile tile = createTile(tileName, xPos, yPos, xSize, ySize, url);
-				tileTypes.put(tileType, tile);
-				
+				if(tileName.equals("Bird")){
+					imageOfTheBird = loadImage(xPos, yPos, xSize, ySize, url);
+				}else{
+					Tile tile = createTile(tileName, xPos, yPos, xSize, ySize, url);
+					tileTypes.put(tileType, tile);
+				}
 			}
 			line = br.readLine().split(";");
 			int rows = Integer.parseInt(line[0]);
@@ -69,7 +74,7 @@ public class CSVGameBoardLoader implements GameBoardLoader{
 					
 				}
 			}
-			GameBoard gb = new GameBoard(tiles);
+			GameBoard gb = new GameBoard(tiles, imageOfTheBird);
 			return gb;
 		} catch (IOException e) { //dva druhy vyjimek - checked - compiler kontroluje ze je zachytavam, runtime vyjimky - nemusi ze zachytavat
 			throw new RuntimeException("Chyba pri cteni souboru", e);
@@ -78,14 +83,7 @@ public class CSVGameBoardLoader implements GameBoardLoader{
 
 	private Tile createTile(String tileName, int xPos, int yPos, int xSize, int ySize, String url) throws IOException {
 			// nacist obrazek z URL
-			BufferedImage originalImage = ImageIO.read(new URL(url));
-			// vyriznout z obrazku sprite podle x,y, a sirka vyska
-			BufferedImage croppedImage = originalImage.getSubimage(xPos, yPos, xSize, ySize);
-			// zvetsime/zmensime sprite tak, aby pasoval do naseho rozmeru dlazdice
-			BufferedImage resizedImage = new BufferedImage(Tile.SIZE, Tile.SIZE, BufferedImage.TYPE_INT_ARGB);
-			// TODO nastavit parametry pro scaling
-			Graphics2D g = (Graphics2D)resizedImage.getGraphics();
-			g.drawImage(croppedImage, 0, 0, Tile.SIZE, Tile.SIZE, null);
+			BufferedImage resizedImage = loadImage(xPos, yPos, xSize, ySize, url);
 			// podle typu (clazz) vytvorime instanci patricne tridy
 			switch (tileName) {
 			case "Wall":
@@ -98,6 +96,19 @@ public class CSVGameBoardLoader implements GameBoardLoader{
 				throw new RuntimeException("Neznama trida dlazdice " + tileName);
 			}
 		}
+
+	private BufferedImage loadImage(int xPos, int yPos, int xSize, int ySize, String url)
+			throws IOException, MalformedURLException {
+		BufferedImage originalImage = ImageIO.read(new URL(url));
+		// vyriznout z obrazku sprite podle x,y, a sirka vyska
+		BufferedImage croppedImage = originalImage.getSubimage(xPos, yPos, xSize, ySize);
+		// zvetsime/zmensime sprite tak, aby pasoval do naseho rozmeru dlazdice
+		BufferedImage resizedImage = new BufferedImage(Tile.SIZE, Tile.SIZE, BufferedImage.TYPE_INT_ARGB);
+		// TODO nastavit parametry pro scaling
+		Graphics2D g = (Graphics2D)resizedImage.getGraphics();
+		g.drawImage(croppedImage, 0, 0, Tile.SIZE, Tile.SIZE, null);
+		return resizedImage;
+	}
 	
 	
 	

@@ -1,6 +1,7 @@
 package flappy.cz.uhk.smitkja1.model;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 import flappy.cz.uhk.smitkja1.model.tiles.BonusTile;
 import flappy.cz.uhk.smitkja1.model.tiles.WallTile;
@@ -12,15 +13,9 @@ public class GameBoard implements TickAware{
 	Bird bird;
 	boolean gameOver = false;
 	
-	public GameBoard() {
-		tiles = new Tile[20][20];
-		// tiles[2][1] = new WallTile();
-		bird = new Bird(viewportWidth/2, tiles.length*Tile.SIZE/2);
-	}
-	
-	public GameBoard(Tile[][] tiles) {
+	public GameBoard(Tile[][] tiles, BufferedImage imageOfTheBird) {
 		this.tiles = tiles;
-		bird = new Bird(viewportWidth/2, tiles.length*Tile.SIZE/2);
+		bird = new Bird(viewportWidth/2, tiles.length*Tile.SIZE/2, imageOfTheBird);
 	}
 	
 	public void drawAndTestCollisions(Graphics g){
