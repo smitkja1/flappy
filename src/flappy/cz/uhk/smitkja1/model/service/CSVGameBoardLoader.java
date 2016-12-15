@@ -12,6 +12,7 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 
+import flappy.cz.uhk.smitkja1.model.tiles.BonusTile;
 import flappy.cz.uhk.smitkja1.model.tiles.EmptyTile;
 import flappy.cz.uhk.smitkja1.model.GameBoard;
 import flappy.cz.uhk.smitkja1.model.Tile;
@@ -90,7 +91,7 @@ public class CSVGameBoardLoader implements GameBoardLoader{
 			case "Wall":
 				return new WallTile(resizedImage);
 			case "Bonus":
-				return new WallTile(resizedImage); // TODO dodelat dlazdici typu bonus
+				return new BonusTile(resizedImage);
 			case "Empty":
 				return new EmptyTile(resizedImage);  
 			default:

@@ -2,6 +2,7 @@ package flappy.cz.uhk.smitkja1.model;
 
 import java.awt.Graphics;
 
+import flappy.cz.uhk.smitkja1.model.tiles.BonusTile;
 import flappy.cz.uhk.smitkja1.model.tiles.WallTile;
 
 public class GameBoard implements TickAware{
@@ -42,14 +43,18 @@ public class GameBoard implements TickAware{
 						if(bird.collidesWithRectangle(screenX, screenY, Tile.SIZE, Tile.SIZE)){
 						System.out.println("kolize");
 						gameOver = true;
-						}
+					}}
+					if (t instanceof BonusTile){
+						if(bird.collidesWithRectangle(screenX, screenY, Tile.SIZE, Tile.SIZE)){							
+						System.out.println("bonus");
+						((BonusTile) t).setActive(false);											
+					}}
 					//TODO pridat bonusy - pres kolizi, jakmile ho ptak sezere tak zmizi	
-					}
-				}						
+					}						
+				}
 			}
-		}
 		bird.draw(g);
-	}
+		}
 
 
 	@Override

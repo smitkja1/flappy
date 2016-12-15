@@ -16,5 +16,8 @@ public abstract class AbstractWallTile implements Tile {
 	public void draw(Graphics g, int x, int y) {
 		//g.drawRect(x, y, Tile.SIZE, Tile.SIZE);
 		g.drawImage(image, x, y, null);
-	}
+	}	
+	
+	
+	
 }
