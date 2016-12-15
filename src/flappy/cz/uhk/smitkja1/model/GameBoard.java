@@ -22,7 +22,7 @@ public class GameBoard implements TickAware{
 		//vykresli gameboard, ptaka a checkuje kolize
 		int minJ = shiftX/Tile.SIZE;
 		//2 pro zaokrouhleni nahoru po deleni
-		int maxJ = minJ + viewportWidth/Tile.SIZE + 2; 
+		int maxJ = minJ + viewportWidth/Tile.SIZE + 2; //dasdasd
 		for (int i = 0; i < tiles.length; i++){
 			for (int j = minJ; j < maxJ; j++){
 				//datovy typ mohou pretekat dokola, chceme aby se svet opakoval
