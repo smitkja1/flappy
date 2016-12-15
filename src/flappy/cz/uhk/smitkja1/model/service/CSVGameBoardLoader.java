@@ -45,10 +45,12 @@ public class CSVGameBoardLoader implements GameBoardLoader{
 				int xSize = Integer.parseInt(line[4]);
 				int ySize = Integer.parseInt(line[5]);
 				String url = line[6];
+				String referencedTileType = (line.length >= 8) ? line[7] : ""; //nepovinný odkaz, pouzivame u bonusu
+				Tile referencedTile = tileTypes.get(referencedTileType);
 				if(tileName.equals("Bird")){
 					imageOfTheBird = loadImage(xPos, yPos, xSize, ySize, url);
 				}else{
-					Tile tile = createTile(tileName, xPos, yPos, xSize, ySize, url);
+					Tile tile = createTile(tileName, xPos, yPos, xSize, ySize, url, referencedTile);
 					tileTypes.put(tileType, tile);
 				}
 			}
@@ -81,17 +83,17 @@ public class CSVGameBoardLoader implements GameBoardLoader{
 		}
 	}
 
-	private Tile createTile(String tileName, int xPos, int yPos, int xSize, int ySize, String url) throws IOException {
+	private Tile createTile(String tileName, int xPos, int yPos, int xSize, int ySize, String url, Tile referencedTile) throws IOException {
 			// nacist obrazek z URL
 			BufferedImage resizedImage = loadImage(xPos, yPos, xSize, ySize, url);
 			// podle typu (clazz) vytvorime instanci patricne tridy
 			switch (tileName) {
 			case "Wall":
 				return new WallTile(resizedImage);
-			case "Bonus":
-				return new BonusTile(resizedImage);
 			case "Empty":
-				return new EmptyTile(resizedImage);  
+				return new EmptyTile(resizedImage);
+			case "Bonus":
+				return new BonusTile(resizedImage, referencedTile);
 			default:
 				throw new RuntimeException("Neznama trida dlazdice " + tileName);
 			}
