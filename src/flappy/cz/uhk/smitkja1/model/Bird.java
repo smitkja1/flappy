@@ -10,7 +10,7 @@ public class Bird implements TickAware{
 	//fyzika
 	static final double koefUp = -5.0;
 	static final double koefDown = 2.0;
-	static final int ticksFlyingUp = 6;
+	static final int ticksFlyingUp = 4;
 	//souradnice
 	int viewportX;
 	double viewportY;

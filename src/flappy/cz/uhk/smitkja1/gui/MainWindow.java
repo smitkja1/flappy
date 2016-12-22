@@ -5,10 +5,10 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+//import java.io.FileInputStream;
+//import java.io.FileNotFoundException;
+//import java.io.IOException;
+//import java.io.InputStream;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,8 +16,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 import flappy.cz.uhk.smitkja1.model.GameBoard;
-import flappy.cz.uhk.smitkja1.model.service.CSVGameBoardLoader;
-import flappy.cz.uhk.smitkja1.model.service.GameBoardLoader;
+//import flappy.cz.uhk.smitkja1.model.service.CSVGameBoardLoader;
+//import flappy.cz.uhk.smitkja1.model.service.GameBoardLoader;
 
 
 @SuppressWarnings("serial")
@@ -36,14 +36,17 @@ public class MainWindow extends JFrame{
 	
 	
 	public MainWindow() {
-		try (InputStream i = new FileInputStream("level.csv");){
+		/*try (InputStream i = new FileInputStream("level3.csv");){
 			GameBoardLoader loader = new CSVGameBoardLoader(i);
 			gameboard = loader.loadLevel();
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		} catch (IOException e1) {
 			e1.printStackTrace();
-		} 
+		
+		}*/ 
+		LevelPicker picker = new LevelPicker();
+		gameboard = picker.pickAndLoadLevel();
 		
 		//gameboard = new GameBoard();
 		add(pnl,BorderLayout.CENTER);

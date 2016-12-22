@@ -71,6 +71,10 @@ public class CSVGameBoardLoader implements GameBoardLoader{
 						//bunka v CSV chybi = povazujeme ji za prazdnou
 						cell = "";
 					}
+					if("B".equals(cell)){
+						tiles[i][j] = ((BonusTile)tileTypes.get("B")).clone();
+						continue;
+					}
 					//ziskame odpovidajici dlazdice z hashmapy
 					tiles[i][j] = tileTypes.get(cell);
 					
