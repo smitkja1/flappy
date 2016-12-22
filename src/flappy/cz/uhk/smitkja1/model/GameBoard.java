@@ -8,7 +8,7 @@ import flappy.cz.uhk.smitkja1.model.tiles.WallTile;
 
 public class GameBoard implements TickAware{
 	Tile[][] tiles; 
-	int shiftX = 30;
+	int shiftX;
 	int viewportWidth = 200;
 	Bird bird;
 	boolean gameOver = false;
@@ -19,6 +19,7 @@ public class GameBoard implements TickAware{
 	}
 	
 	public void drawAndTestCollisions(Graphics g){
+		
 		//vykresli gameboard, ptaka a checkuje kolize
 		int minJ = shiftX/Tile.SIZE;
 		//2 pro zaokrouhleni nahoru po deleni
@@ -34,17 +35,20 @@ public class GameBoard implements TickAware{
 					int screenY = i*Tile.SIZE;
 					t.draw(g, screenX, screenY);
 					//nakreslime dlazdici a otestujeme moznou kolizi s ptakem
-					if (t instanceof WallTile){
+					if (t instanceof WallTile){						
 						if(bird.collidesWithRectangle(screenX, screenY, Tile.SIZE, Tile.SIZE)){
 						System.out.println("kolize");
 						gameOver = true;
 					}}
 					if (t instanceof BonusTile){
+						
 						if(bird.collidesWithRectangle(screenX, screenY, Tile.SIZE, Tile.SIZE)){							
 						System.out.println("bonus");
 						((BonusTile) t).setActive(false);											
 					}}
-					
+					if (t instanceof BonusTile && j == (maxJ - 2)){
+						((BonusTile) t).setActive(true);
+					}
 					}						
 				}
 			}

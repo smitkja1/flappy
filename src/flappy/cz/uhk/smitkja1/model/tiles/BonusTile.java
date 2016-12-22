@@ -3,7 +3,6 @@ package flappy.cz.uhk.smitkja1.model.tiles;
 
 import java.awt.Graphics;
 import java.awt.Image;
-
 import flappy.cz.uhk.smitkja1.model.Tile;
 
 public class BonusTile extends AbstractWallTile {
@@ -30,7 +29,11 @@ public class BonusTile extends AbstractWallTile {
 			g.drawImage(image, x, y, null);
 		}else{
 			emptyTile.draw(g, x, y);
-		}
+		}		
 	}	
-		
+	
+	public BonusTile clone(){
+		//kolonování bonustile
+		return new BonusTile(image, emptyTile);
+	}
 }
